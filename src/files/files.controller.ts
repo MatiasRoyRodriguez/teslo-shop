@@ -1,9 +1,10 @@
-import { Controller, Get, Post, UploadedFile, UseInterceptors, Param } from '@nestjs/common';
+import { Controller, Get, Post, UploadedFile, UseInterceptors, Param, Res } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FilesService } from './files.service';
 import { fileFilter, fileNamer } from './helpers';
 import { BadRequestException } from '@nestjs/common/exceptions';
 import { diskStorage } from 'multer';
+import { Response } from 'express';
 
 
 @Controller('files')
@@ -12,10 +13,11 @@ export class FilesController {
 
 	@Get('product/:imageName')
 	findProductImage(
+		@Res() res: Response,
 		@Param('imageName') imageName: string
 	) {
 		const path = this.filesService.getStaticProductImage(imageName);
-		return path;
+		res.sendFile(path);
 	}
 
 	@Post('product')
