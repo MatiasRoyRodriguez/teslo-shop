@@ -19,3 +19,6 @@
 ```
 http://localhost:3000/api/seed
 ```
+
+### WebSocket Repo
+`https://github.com/MatiasRoyRodriguez/ws-client`
